@@ -1,6 +1,7 @@
 # python
 
 ```Create a Dockerfile for Python```
+
 Now that our application is running properly, let’s take a look at creating a Dockerfile.
 
 A Dockerfile is a text document that contains the instructions to assemble a Docker image. When we tell Docker to build our image by executing the docker build command, Docker reads these instructions, executes them, and creates a Docker image as a result.
@@ -22,9 +23,10 @@ We recommend using docker/dockerfile:1, which always points to the latest releas
 
 Next, we need to add a line in our Dockerfile that tells Docker what base image we would like to use for our application.
 
-# syntax=docker/dockerfile:1
+```# syntax=docker/dockerfile:1```
 
-FROM python:3.8-slim-buster
+````FROM python:3.8-slim-buster````
+  
 Docker images can be inherited from other images. Therefore, instead of creating our own base image, we’ll use the official Python image that already has all the tools and packages that we need to run a Python application.
 
 Note
@@ -33,24 +35,26 @@ To learn more about creating your own base images, see Creating base images.
 
 To make things easier when running the rest of our commands, let’s create a working directory. This instructs Docker to use this path as the default location for all subsequent commands. By doing this, we do not have to type out full file paths but can use relative paths based on the working directory.
 
-WORKDIR /app
+````WORKDIR /app````
+  
 Usually, the very first thing you do once you’ve downloaded a project written in Python is to install pip packages. This ensures that your application has all its dependencies installed.
 
 Before we can run pip3 install, we need to get our requirements.txt file into our image. We’ll use the COPY command to do this. The COPY command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy the requirements.txt file into our working directory /app.
 
-COPY requirements.txt requirements.txt
+````COPY requirements.txt requirements.txt```
+  
 Once we have our requirements.txt file inside the image, we can use the RUN command to execute the command pip3 install. This works exactly the same as if we were running pip3 install locally on our machine, but this time the modules are installed into the image.
 
 
   
  Once we have our requirements.txt file inside the image, we can use the RUN command to execute the command pip3 install. This works exactly the same as if we were running pip3 install locally on our machine, but this time the modules are installed into the image.
 
-RUN pip3 install -r requirements.txt
+````RUN pip3 install -r requirements.txt````
   
 At this point, we have an image that is based on Python version 3.8 and we have installed our dependencies. The next step is to add our source code into the image. We’ll use the COPY command just like we did with our requirements.txt file above.
 
-COPY . .
+````COPY . .````
   
 This COPY command takes all the files located in the current directory and copies them into the image. Now, all we have to do is to tell Docker what command we want to run when our image is executed inside a container. We do this using the CMD command. Note that we need to make the application externally visible (i.e. from outside the container) by specifying --host=0.0.0.0.
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+````CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]````
