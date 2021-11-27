@@ -41,3 +41,16 @@ Before we can run pip3 install, we need to get our requirements.txt file into ou
 COPY requirements.txt requirements.txt
 Once we have our requirements.txt file inside the image, we can use the RUN command to execute the command pip3 install. This works exactly the same as if we were running pip3 install locally on our machine, but this time the modules are installed into the image.
 
+
+  
+ Once we have our requirements.txt file inside the image, we can use the RUN command to execute the command pip3 install. This works exactly the same as if we were running pip3 install locally on our machine, but this time the modules are installed into the image.
+
+RUN pip3 install -r requirements.txt
+  
+At this point, we have an image that is based on Python version 3.8 and we have installed our dependencies. The next step is to add our source code into the image. We’ll use the COPY command just like we did with our requirements.txt file above.
+
+COPY . .
+  
+This COPY command takes all the files located in the current directory and copies them into the image. Now, all we have to do is to tell Docker what command we want to run when our image is executed inside a container. We do this using the CMD command. Note that we need to make the application externally visible (i.e. from outside the container) by specifying --host=0.0.0.0.
+
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
