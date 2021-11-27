@@ -1,6 +1,6 @@
 # python
 
-''Create a Dockerfile for Python''
+``Create a Dockerfile for Python``
 Now that our application is running properly, let’s take a look at creating a Dockerfile.
 
 A Dockerfile is a text document that contains the instructions to assemble a Docker image. When we tell Docker to build our image by executing the docker build command, Docker reads these instructions, executes them, and creates a Docker image as a result.
