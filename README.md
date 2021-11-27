@@ -41,7 +41,7 @@ Usually, the very first thing you do once you’ve downloaded a project written 
 
 Before we can run pip3 install, we need to get our requirements.txt file into our image. We’ll use the COPY command to do this. The COPY command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy the requirements.txt file into our working directory /app.
 
-````COPY requirements.txt requirements.txt```
+````COPY requirements.txt requirements.txt````
   
 Once we have our requirements.txt file inside the image, we can use the RUN command to execute the command pip3 install. This works exactly the same as if we were running pip3 install locally on our machine, but this time the modules are installed into the image.
 
